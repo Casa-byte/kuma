@@ -1,0 +1,2622 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="KUMA – Kukis Manis. Cookies hangat, manis, dan dibuat dengan cinta. Homemade cookies premium dengan bahan lokal terbaik.">
+<meta name="keywords" content="cookies, kue kering, homemade cookies, kukis manis, KUMA, Jember, cookies premium">
+<meta name="author" content="KUMA – Kukis Manis">
+<meta property="og:title" content="KUMA – Kukis Manis">
+<meta property="og:description" content="Freshly Baked Happiness in Every Bite">
+<meta property="og:type" content="website">
+<title>KUMA – Kukis Manis | Freshly Baked Happiness</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --choco: #5C3D2E;
+    --caramel: #B85C38;
+    --cream: #FFF4E6;
+    --beige: #EADBC8;
+    --dark-choco: #3D2416;
+    --light-caramel: #E8906A;
+    --warm-white: #FFFDF9;
+    --text-dark: #2C1810;
+    --text-mid: #6B4226;
+    --text-light: #9E7A5A;
+    --success: #2D7A3A;
+    --danger: #C0392B;
+    --shadow-warm: rgba(92, 61, 46, 0.15);
+    --shadow-deep: rgba(92, 61, 46, 0.25);
+    --transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  [data-theme="dark"] {
+    --cream: #1A0F0A;
+    --beige: #2A1810;
+    --warm-white: #1A0F0A;
+    --text-dark: #F5E6D3;
+    --text-mid: #D4A98A;
+    --text-light: #9E7A5A;
+    --shadow-warm: rgba(0, 0, 0, 0.3);
+    --shadow-deep: rgba(0, 0, 0, 0.5);
+    --choco: #C8956A;
+    --caramel: #E8906A;
+    --dark-choco: #F0C8A0;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    overflow-x: hidden;
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+
+  /* ── LOADING SCREEN ── */
+  #loader {
+    position: fixed; inset: 0;
+    background: var(--choco);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  #loader.hidden { opacity: 0; visibility: hidden; }
+
+  .loader-cookie {
+    width: 80px; height: 80px;
+    animation: cookieSpin 1.5s ease-in-out infinite;
+  }
+
+  .loader-text {
+    color: var(--cream);
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    margin-top: 1rem;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes cookieSpin {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.1); }
+    100% { transform: rotate(360deg) scale(1); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+
+  /* ── FLOATING PARTICLES ── */
+  #particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.12;
+    animation: floatParticle linear infinite;
+  }
+
+  @keyframes floatParticle {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.12; }
+    90% { opacity: 0.12; }
+    100% { transform: translateY(-100px) rotate(720deg); opacity: 0; }
+  }
+
+  /* ── NAVBAR ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0 2rem;
+    height: 72px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(255, 244, 230, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(184, 92, 56, 0.15);
+    transition: var(--transition);
+  }
+
+  [data-theme="dark"] nav {
+    background: rgba(26, 15, 10, 0.92);
+    border-bottom-color: rgba(184, 92, 56, 0.25);
+  }
+
+  nav.scrolled {
+    box-shadow: 0 4px 24px var(--shadow-warm);
+  }
+
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+
+  .logo-bear {
+    width: 44px; height: 44px;
+    background: var(--choco);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    box-shadow: 0 2px 8px var(--shadow-warm);
+    transition: var(--transition);
+  }
+
+  .nav-logo:hover .logo-bear { transform: rotate(-10deg) scale(1.08); }
+
+  .logo-text {
+    display: flex; flex-direction: column; line-height: 1;
+  }
+
+  .logo-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--choco);
+    transition: var(--transition);
+  }
+
+  .logo-tagline {
+    font-size: 0.6rem;
+    color: var(--text-light);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .nav-actions {
+    display: flex; align-items: center; gap: 1rem;
+  }
+
+  .dark-toggle {
+    width: 40px; height: 40px;
+    border: none; background: transparent;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    transition: var(--transition);
+    color: var(--text-dark);
+  }
+
+  .dark-toggle:hover {
+    background: var(--beige);
+    transform: rotate(20deg);
+  }
+
+  .hamburger {
+    width: 44px; height: 44px;
+    border: none; background: transparent;
+    cursor: pointer;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 5px;
+    padding: 8px;
+    border-radius: 10px;
+    transition: var(--transition);
+  }
+
+  .hamburger:hover { background: var(--beige); }
+
+  .hamburger span {
+    display: block;
+    width: 22px; height: 2px;
+    background: var(--choco);
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+
+  .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ── SIDE MENU ── */
+  #side-menu-overlay {
+    position: fixed; inset: 0;
+    background: rgba(28, 14, 8, 0.6);
+    z-index: 1100;
+    opacity: 0; visibility: hidden;
+    transition: var(--transition);
+    backdrop-filter: blur(4px);
+  }
+
+  #side-menu-overlay.active { opacity: 1; visibility: visible; }
+
+  #side-menu {
+    position: fixed; top: 0; right: -340px;
+    width: 320px; height: 100vh;
+    background: var(--warm-white);
+    z-index: 1200;
+    padding: 2rem 1.5rem;
+    display: flex; flex-direction: column;
+    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -8px 0 40px var(--shadow-deep);
+    overflow-y: auto;
+  }
+
+  #side-menu.active { right: 0; }
+
+  [data-theme="dark"] #side-menu { background: #1F1008; }
+
+  .side-menu-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--beige);
+  }
+
+  .menu-brand {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    color: var(--choco);
+  }
+
+  .menu-close {
+    width: 36px; height: 36px;
+    border: none; background: var(--beige);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transition);
+    color: var(--text-dark);
+  }
+
+  .menu-close:hover { background: var(--caramel); color: white; transform: rotate(90deg); }
+
+  .side-nav-links {
+    list-style: none;
+    flex: 1;
+  }
+
+  .side-nav-links li {
+    opacity: 0;
+    transform: translateX(30px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  #side-menu.active .side-nav-links li {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  #side-menu.active .side-nav-links li:nth-child(1) { transition-delay: 0.05s; }
+  #side-menu.active .side-nav-links li:nth-child(2) { transition-delay: 0.1s; }
+  #side-menu.active .side-nav-links li:nth-child(3) { transition-delay: 0.15s; }
+  #side-menu.active .side-nav-links li:nth-child(4) { transition-delay: 0.2s; }
+  #side-menu.active .side-nav-links li:nth-child(5) { transition-delay: 0.25s; }
+  #side-menu.active .side-nav-links li:nth-child(6) { transition-delay: 0.3s; }
+  #side-menu.active .side-nav-links li:nth-child(7) { transition-delay: 0.35s; }
+  #side-menu.active .side-nav-links li:nth-child(8) { transition-delay: 0.4s; }
+
+  .side-nav-links a {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.9rem 1rem;
+    text-decoration: none;
+    color: var(--text-dark);
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: var(--transition);
+    margin-bottom: 0.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .side-nav-links a::before {
+    content: '';
+    position: absolute; left: 0; top: 0;
+    width: 0; height: 100%;
+    background: linear-gradient(135deg, var(--caramel), var(--light-caramel));
+    transition: width 0.3s ease;
+    border-radius: 12px;
+    z-index: 0;
+  }
+
+  .side-nav-links a:hover::before { width: 100%; }
+
+  .side-nav-links a:hover {
+    color: white;
+    transform: translateX(4px);
+  }
+
+  .side-nav-links a span.nav-icon {
+    font-size: 1.2rem;
+    z-index: 1;
+    position: relative;
+  }
+
+  .side-nav-links a span.nav-label {
+    z-index: 1;
+    position: relative;
+  }
+
+  .menu-order-btn {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--caramel), var(--light-caramel));
+    border: none;
+    border-radius: 14px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    transition: var(--transition);
+    text-decoration: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .menu-order-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(184, 92, 56, 0.4); }
+
+  /* ── SECTION COMMONS ── */
+  section { position: relative; z-index: 1; }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--caramel);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--choco);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .section-desc {
+    font-size: 1.05rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+    max-width: 600px;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 72px;
+  }
+
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(184, 92, 56, 0.12) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(92, 61, 46, 0.08) 0%, transparent 50%),
+      var(--cream);
+  }
+
+  .hero-pattern {
+    position: absolute; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='2' fill='%23B85C38' fill-opacity='0.06'/%3E%3Ccircle cx='0' cy='0' r='1.5' fill='%235C3D2E' fill-opacity='0.05'/%3E%3Ccircle cx='60' cy='60' r='1.5' fill='%235C3D2E' fill-opacity='0.05'/%3E%3C/svg%3E");
+    background-size: 60px 60px;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    padding: 4rem 0;
+    width: 100%;
+  }
+
+  .hero-text { order: 1; }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center; gap: 0.5rem;
+    background: var(--beige);
+    border: 1px solid rgba(184, 92, 56, 0.25);
+    border-radius: 100px;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--caramel);
+    margin-bottom: 1.5rem;
+    animation: fadeInUp 0.6s ease forwards;
+  }
+
+  .hero-badge .dot {
+    width: 6px; height: 6px;
+    background: var(--caramel);
+    border-radius: 50%;
+    animation: blink 1.5s ease infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.1;
+    color: var(--choco);
+    margin-bottom: 1rem;
+    animation: fadeInUp 0.6s ease 0.15s both;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--caramel);
+  }
+
+  .hero-subtitle {
+    font-size: 1.15rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    animation: fadeInUp 0.6s ease 0.3s both;
+  }
+
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    animation: fadeInUp 0.6s ease 0.45s both;
+  }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.9rem 2rem;
+    background: linear-gradient(135deg, var(--caramel), var(--light-caramel));
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+    font-family: 'DM Sans', sans-serif;
+    box-shadow: 0 4px 16px rgba(184, 92, 56, 0.35);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(184, 92, 56, 0.5);
+  }
+
+  .btn-secondary {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.9rem 2rem;
+    background: transparent;
+    color: var(--choco);
+    border: 2px solid var(--choco);
+    border-radius: 100px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-secondary:hover {
+    background: var(--choco);
+    color: white;
+    transform: translateY(-3px);
+  }
+
+  .hero-visual { order: 2; display: flex; justify-content: center; }
+
+  .hero-cookie-scene {
+    position: relative;
+    width: 420px; height: 420px;
+    animation: fadeInRight 0.8s ease 0.2s both;
+  }
+
+  .cookie-main-circle {
+    width: 380px; height: 380px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #D4956A, #8B4513);
+    position: absolute;
+    top: 20px; left: 20px;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 20px 60px rgba(92, 61, 46, 0.4), inset 0 -10px 20px rgba(0,0,0,0.2);
+    animation: heroFloat 4s ease-in-out infinite;
+    font-size: 8rem;
+    overflow: hidden;
+  }
+
+  .cookie-main-circle::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.15), transparent 60%);
+    border-radius: 50%;
+  }
+
+  @keyframes heroFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-12px) rotate(2deg); }
+    66% { transform: translateY(-6px) rotate(-1deg); }
+  }
+
+  .hero-chip { position: absolute; }
+
+  .chip-1 {
+    top: 15%; right: 5%;
+    background: #3D2416;
+    width: 18px; height: 14px;
+    border-radius: 4px;
+    transform: rotate(-20deg);
+    animation: chipFloat1 3s ease-in-out infinite;
+  }
+
+  .chip-2 {
+    bottom: 20%; left: 0%;
+    background: #5C3D2E;
+    width: 14px; height: 14px;
+    border-radius: 3px;
+    transform: rotate(15deg);
+    animation: chipFloat2 3.5s ease-in-out infinite;
+  }
+
+  .chip-3 {
+    top: 5%; left: 15%;
+    background: #7B5940;
+    width: 10px; height: 10px;
+    border-radius: 2px;
+    transform: rotate(30deg);
+    animation: chipFloat3 4s ease-in-out infinite;
+  }
+
+  @keyframes chipFloat1 { 0%, 100% { transform: translateY(0) rotate(-20deg); } 50% { transform: translateY(-10px) rotate(-25deg); } }
+  @keyframes chipFloat2 { 0%, 100% { transform: translateY(0) rotate(15deg); } 50% { transform: translateY(-8px) rotate(20deg); } }
+  @keyframes chipFloat3 { 0%, 100% { transform: translateY(0) rotate(30deg); } 50% { transform: translateY(-12px) rotate(35deg); } }
+
+  .hero-stats {
+    display: flex; gap: 2rem;
+    margin-top: 2.5rem;
+    animation: fadeInUp 0.6s ease 0.6s both;
+  }
+
+  .hero-stat { text-align: center; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: var(--caramel); }
+  .stat-label { font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; }
+
+  /* ── ABOUT ── */
+  #about {
+    padding: 8rem 0;
+    background: var(--beige);
+  }
+
+  [data-theme="dark"] #about { background: #1F1008; }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-bear-wrapper {
+    width: 320px; height: 320px;
+    background: var(--choco);
+    border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10rem;
+    animation: bearWiggle 5s ease-in-out infinite;
+    box-shadow: 0 20px 60px var(--shadow-deep);
+    margin: 0 auto;
+  }
+
+  @keyframes bearWiggle {
+    0%, 100% { border-radius: 40% 60% 55% 45% / 55% 45% 60% 40%; transform: rotate(0deg); }
+    25% { border-radius: 55% 45% 40% 60% / 40% 60% 45% 55%; transform: rotate(2deg); }
+    75% { border-radius: 45% 55% 60% 40% / 60% 40% 55% 45%; transform: rotate(-2deg); }
+  }
+
+  .about-card-float {
+    position: absolute;
+    background: white;
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 8px 32px var(--shadow-warm);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--choco);
+    display: flex; align-items: center; gap: 0.5rem;
+    animation: cardFloat 4s ease-in-out infinite;
+  }
+
+  [data-theme="dark"] .about-card-float { background: #2A1810; }
+
+  .about-card-float.card-top {
+    top: 0; right: -20px;
+    animation-delay: 0.5s;
+  }
+
+  .about-card-float.card-bottom {
+    bottom: 20px; left: -20px;
+    animation-delay: 1s;
+  }
+
+  @keyframes cardFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .about-text { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .about-feature {
+    display: flex; gap: 1rem;
+    padding: 1.25rem;
+    background: var(--warm-white);
+    border-radius: 16px;
+    border: 1px solid rgba(184, 92, 56, 0.12);
+    transition: var(--transition);
+  }
+
+  .about-feature:hover {
+    transform: translateX(6px);
+    box-shadow: 0 4px 16px var(--shadow-warm);
+    border-color: var(--caramel);
+  }
+
+  .feature-icon { font-size: 1.8rem; flex-shrink: 0; }
+
+  .feature-content h4 {
+    font-weight: 600; font-size: 0.95rem; color: var(--choco);
+    margin-bottom: 0.25rem;
+  }
+
+  .feature-content p { font-size: 0.875rem; color: var(--text-mid); line-height: 1.6; }
+
+  /* ── PRODUCTS ── */
+  #products { padding: 8rem 0; }
+
+  .products-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+  }
+
+  .product-card {
+    background: var(--warm-white);
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1px solid rgba(184, 92, 56, 0.12);
+    transition: var(--transition);
+    position: relative;
+    cursor: pointer;
+  }
+
+  [data-theme="dark"] .product-card { background: #1F1008; border-color: rgba(184,92,56,0.2); }
+
+  .product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px var(--shadow-warm);
+    border-color: var(--caramel);
+  }
+
+  .product-img-wrap {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    /* Replace this with actual product photo */
+    background: linear-gradient(135deg, #D4956A, #8B4513);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 5rem;
+  }
+
+  .product-img-wrap.red-velvet { background: linear-gradient(135deg, #C0392B, #8B0000); }
+  .product-img-wrap.matcha { background: linear-gradient(135deg, #4CAF50, #2E7D32); }
+  .product-img-wrap.triple { background: linear-gradient(135deg, #3E2723, #1A0A00); }
+
+  /* Replace this image with actual product photo from public/images/products/ */
+  .product-img-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .product-card:hover .product-img-wrap img { transform: scale(1.05); }
+
+  .product-badge {
+    position: absolute; top: 1rem; right: 1rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 100px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .badge-available { background: rgba(45, 122, 58, 0.15); color: #1B5E20; border: 1px solid rgba(45,122,58,0.3); }
+  .badge-soon { background: rgba(184, 92, 56, 0.15); color: var(--caramel); border: 1px solid rgba(184,92,56,0.3); }
+
+  .product-body { padding: 1.5rem; }
+
+  .product-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--choco);
+    margin-bottom: 0.4rem;
+  }
+
+  .product-desc {
+    font-size: 0.85rem;
+    color: var(--text-mid);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .product-meta {
+    display: flex; align-items: center; justify-content: space-between;
+    padding-top: 1rem;
+    border-top: 1px solid var(--beige);
+  }
+
+  .product-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--caramel);
+  }
+
+  .product-cal {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    display: flex; align-items: center; gap: 0.25rem;
+  }
+
+  .product-btn {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .product-btn.active-btn {
+    background: linear-gradient(135deg, var(--caramel), var(--light-caramel));
+    color: white;
+  }
+
+  .product-btn.active-btn:hover { box-shadow: 0 4px 16px rgba(184,92,56,0.4); transform: translateY(-1px); }
+
+  .product-btn.soon-btn {
+    background: var(--beige);
+    color: var(--text-light);
+    cursor: not-allowed;
+  }
+
+  /* ── OPEN PO ── */
+  #open-po {
+    padding: 8rem 0;
+    background: var(--beige);
+  }
+
+  [data-theme="dark"] #open-po { background: #1F1008; }
+
+  .po-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .po-status-card {
+    background: var(--warm-white);
+    border-radius: 28px;
+    padding: 3rem;
+    text-align: center;
+    border: 2px solid transparent;
+    transition: var(--transition);
+    box-shadow: 0 8px 40px var(--shadow-warm);
+  }
+
+  [data-theme="dark"] .po-status-card { background: #2A1810; }
+
+  .po-status-card.open { border-color: var(--success); }
+  .po-status-card.closed { border-color: var(--danger); }
+
+  .po-badge {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .po-badge.open { background: rgba(45,122,58,0.1); color: var(--success); border: 1px solid rgba(45,122,58,0.3); }
+  .po-badge.closed { background: rgba(192,57,43,0.1); color: var(--danger); border: 1px solid rgba(192,57,43,0.3); }
+
+  .po-badge .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    animation: blink 1.2s ease infinite;
+  }
+
+  .po-badge.open .status-dot { background: var(--success); }
+  .po-badge.closed .status-dot { background: var(--danger); animation: none; opacity: 0.5; }
+
+  .po-main-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--choco);
+    margin-bottom: 0.75rem;
+  }
+
+  .po-sub-text { font-size: 0.95rem; color: var(--text-mid); margin-bottom: 2rem; }
+
+  .countdown {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  .countdown-unit {
+    background: var(--beige);
+    border-radius: 14px;
+    padding: 1rem 0.5rem;
+    text-align: center;
+  }
+
+  [data-theme="dark"] .countdown-unit { background: #3A2010; }
+
+  .countdown-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--caramel);
+    line-height: 1;
+    display: block;
+  }
+
+  .countdown-label {
+    font-size: 0.65rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.25rem;
+    display: block;
+  }
+
+  .po-schedule {
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+
+  .schedule-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.25rem;
+    background: var(--warm-white);
+    border-radius: 14px;
+    border-left: 4px solid var(--caramel);
+    transition: var(--transition);
+  }
+
+  [data-theme="dark"] .schedule-item { background: #2A1810; }
+
+  .schedule-item:hover { transform: translateX(4px); box-shadow: 0 4px 16px var(--shadow-warm); }
+
+  .schedule-icon { font-size: 1.5rem; flex-shrink: 0; }
+
+  .schedule-content h4 { font-weight: 600; font-size: 0.9rem; color: var(--choco); }
+  .schedule-content p { font-size: 0.8rem; color: var(--text-mid); margin-top: 0.2rem; }
+
+  /* ── NUTRITION ── */
+  #nutrition { padding: 8rem 0; }
+
+  .nutrition-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .nutrition-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--choco);
+    margin-bottom: 1rem;
+  }
+
+  .nutrition-info p { font-size: 0.9rem; color: var(--text-mid); line-height: 1.7; }
+
+  .serving-size {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--beige);
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: var(--text-mid);
+  }
+
+  [data-theme="dark"] .serving-size { background: #2A1810; }
+
+  .nutrition-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .nutri-card {
+    background: var(--warm-white);
+    border-radius: 20px;
+    padding: 2rem;
+    border: 1px solid rgba(184,92,56,0.12);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+
+  [data-theme="dark"] .nutri-card { background: #1F1008; }
+
+  .nutri-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px var(--shadow-warm); }
+
+  .nutri-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 4px;
+  }
+
+  .nutri-card.cal::before { background: linear-gradient(90deg, var(--caramel), var(--light-caramel)); }
+  .nutri-card.protein::before { background: linear-gradient(90deg, #4CAF50, #66BB6A); }
+  .nutri-card.carb::before { background: linear-gradient(90deg, #FF9800, #FFB74D); }
+  .nutri-card.fat::before { background: linear-gradient(90deg, #9C27B0, #BA68C8); }
+
+  .nutri-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+
+  .nutri-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--choco);
+    line-height: 1;
+  }
+
+  .nutri-unit { font-size: 1rem; color: var(--text-light); }
+  .nutri-name { font-size: 0.8rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.12em; margin-top: 0.25rem; }
+
+  .nutri-bar-wrap { margin-top: 0.75rem; background: var(--beige); border-radius: 100px; height: 6px; overflow: hidden; }
+
+  [data-theme="dark"] .nutri-bar-wrap { background: #3A2010; }
+
+  .nutri-bar { height: 100%; border-radius: 100px; transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1); width: 0; }
+
+  .nutri-card.cal .nutri-bar { background: linear-gradient(90deg, var(--caramel), var(--light-caramel)); }
+  .nutri-card.protein .nutri-bar { background: linear-gradient(90deg, #4CAF50, #66BB6A); }
+  .nutri-card.carb .nutri-bar { background: linear-gradient(90deg, #FF9800, #FFB74D); }
+  .nutri-card.fat .nutri-bar { background: linear-gradient(90deg, #9C27B0, #BA68C8); }
+
+  /* ── SUSTAINABILITY ── */
+  #sustainability {
+    padding: 8rem 0;
+    background: var(--beige);
+  }
+
+  [data-theme="dark"] #sustainability { background: #1F1008; }
+
+  .sustain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .sustain-card {
+    background: var(--warm-white);
+    border-radius: 20px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(184,92,56,0.12);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+  }
+
+  [data-theme="dark"] .sustain-card { background: #2A1810; }
+
+  .sustain-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px var(--shadow-warm);
+    border-color: var(--caramel);
+  }
+
+  .sustain-num {
+    position: absolute; top: 1rem; right: 1.25rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgba(184,92,56,0.08);
+    line-height: 1;
+  }
+
+  .sustain-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+
+  .sustain-title {
+    font-weight: 600; font-size: 0.95rem; color: var(--choco);
+    margin-bottom: 0.5rem;
+  }
+
+  .sustain-desc { font-size: 0.82rem; color: var(--text-mid); line-height: 1.6; }
+
+  /* ── SMART PACKAGING ── */
+  #smart-packaging { padding: 8rem 0; }
+
+  .packaging-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .qr-mockup {
+    display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+  }
+
+  .qr-package {
+    width: 280px;
+    background: var(--warm-white);
+    border-radius: 24px;
+    padding: 2rem;
+    border: 2px solid var(--beige);
+    box-shadow: 0 12px 48px var(--shadow-warm);
+    text-align: center;
+    transition: var(--transition);
+  }
+
+  [data-theme="dark"] .qr-package { background: #1F1008; }
+
+  .qr-package:hover { transform: scale(1.02); }
+
+  .package-logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: var(--choco);
+    margin-bottom: 1rem;
+  }
+
+  .qr-code-sim {
+    width: 120px; height: 120px;
+    margin: 0 auto 1rem;
+    background: var(--choco);
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 2px;
+    padding: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .qr-code-sim:hover { box-shadow: 0 8px 24px rgba(92,61,46,0.4); transform: scale(1.05); }
+
+  .qr-cell {
+    border-radius: 1px;
+    background: var(--choco);
+  }
+
+  .qr-cell.white { background: #FFF4E6; }
+
+  .qr-scan-label {
+    font-size: 0.7rem;
+    color: var(--text-light);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .qr-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .qr-feat {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    padding: 1rem;
+    background: var(--warm-white);
+    border-radius: 14px;
+    border: 1px solid rgba(184,92,56,0.12);
+    transition: var(--transition);
+  }
+
+  [data-theme="dark"] .qr-feat { background: #1F1008; }
+
+  .qr-feat:hover { border-color: var(--caramel); transform: translateY(-2px); }
+
+  .qr-feat-icon { font-size: 1.4rem; flex-shrink: 0; }
+  .qr-feat-text h5 { font-size: 0.82rem; font-weight: 600; color: var(--choco); }
+  .qr-feat-text p { font-size: 0.75rem; color: var(--text-mid); margin-top: 0.2rem; }
+
+  /* QR Modal */
+  .qr-modal-overlay {
+    position: fixed; inset: 0;
+    background: rgba(28, 14, 8, 0.7);
+    z-index: 5000;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; visibility: hidden;
+    transition: var(--transition);
+    backdrop-filter: blur(8px);
+  }
+
+  .qr-modal-overlay.active { opacity: 1; visibility: visible; }
+
+  .qr-modal {
+    background: var(--warm-white);
+    border-radius: 28px;
+    padding: 2.5rem;
+    max-width: 480px; width: 90%;
+    transform: scale(0.9);
+    transition: var(--transition);
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  [data-theme="dark"] .qr-modal { background: #2A1810; }
+
+  .qr-modal-overlay.active .qr-modal { transform: scale(1); }
+
+  .qr-modal-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .qr-modal-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--choco);
+  }
+
+  .modal-close {
+    width: 36px; height: 36px;
+    border: none; background: var(--beige);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: var(--transition);
+    color: var(--text-dark);
+  }
+
+  .modal-close:hover { background: var(--caramel); color: white; }
+
+  .qr-info-section { margin-bottom: 1.5rem; }
+
+  .qr-info-section h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--caramel);
+    margin-bottom: 0.75rem;
+  }
+
+  .qr-info-section p, .qr-info-section ul {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  .qr-info-section ul { padding-left: 1rem; }
+  .qr-info-section ul li { margin-bottom: 0.3rem; }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { padding: 8rem 0; background: var(--beige); }
+
+  [data-theme="dark"] #testimonials { background: #1F1008; }
+
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .testi-card {
+    background: var(--warm-white);
+    border-radius: 20px;
+    padding: 1.75rem;
+    border: 1px solid rgba(184,92,56,0.12);
+    transition: var(--transition);
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+
+  [data-theme="dark"] .testi-card { background: #2A1810; }
+
+  .testi-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px var(--shadow-warm); }
+
+  .testi-stars { color: #F4A523; font-size: 1rem; letter-spacing: 2px; }
+
+  .testi-text {
+    font-size: 0.95rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  .testi-author {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-top: auto;
+  }
+
+  .testi-avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem;
+    background: var(--beige);
+    flex-shrink: 0;
+  }
+
+  [data-theme="dark"] .testi-avatar { background: #3A2010; }
+
+  .testi-name { font-weight: 600; font-size: 0.9rem; color: var(--choco); }
+  .testi-role { font-size: 0.75rem; color: var(--text-light); }
+
+  /* ── ORDER / CONTACT ── */
+  #order { padding: 8rem 0; }
+
+  .order-banner {
+    background: linear-gradient(135deg, var(--choco) 0%, var(--caramel) 100%);
+    border-radius: 32px;
+    padding: 5rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .order-banner::before {
+    content: '🐻';
+    position: absolute;
+    font-size: 15rem;
+    opacity: 0.05;
+    right: -2rem; top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .order-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: white;
+    margin-bottom: 0.75rem;
+  }
+
+  .order-banner p {
+    color: rgba(255,255,255,0.8);
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .order-btns {
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  }
+
+  .btn-wa {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 1rem 2rem;
+    background: #25D366;
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-wa:hover { background: #128C7E; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(37,211,102,0.4); }
+
+  .btn-ig {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    padding: 1rem 2rem;
+    background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-ig:hover { opacity: 0.9; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(220,39,67,0.4); }
+
+  /* ── CONTACT ── */
+  #contact { padding: 8rem 0; background: var(--beige); }
+
+  [data-theme="dark"] #contact { background: #1F1008; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.5rem;
+    background: var(--warm-white);
+    border-radius: 16px;
+    border: 1px solid rgba(184,92,56,0.12);
+    margin-bottom: 1rem;
+    transition: var(--transition);
+  }
+
+  [data-theme="dark"] .contact-item { background: #2A1810; }
+
+  .contact-item:hover { transform: translateX(4px); border-color: var(--caramel); }
+
+  .contact-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .contact-label { font-size: 0.75rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.25rem; }
+  .contact-value { font-size: 0.95rem; color: var(--choco); font-weight: 500; }
+  .contact-value a { color: var(--caramel); text-decoration: none; }
+  .contact-value a:hover { text-decoration: underline; }
+
+  .faq-list { display: flex; flex-direction: column; gap: 0.75rem; }
+
+  .faq-item {
+    background: var(--warm-white);
+    border-radius: 14px;
+    border: 1px solid rgba(184,92,56,0.12);
+    overflow: hidden;
+    transition: var(--transition);
+  }
+
+  [data-theme="dark"] .faq-item { background: #2A1810; }
+
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 1.25rem;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--choco);
+    gap: 1rem;
+  }
+
+  .faq-q::after {
+    content: '+';
+    font-size: 1.2rem;
+    color: var(--caramel);
+    flex-shrink: 0;
+    transition: var(--transition);
+  }
+
+  .faq-item.open .faq-q::after { content: '−'; }
+
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    padding: 0 1.25rem;
+    font-size: 0.875rem;
+    color: var(--text-mid);
+    line-height: 1.7;
+  }
+
+  .faq-item.open .faq-a { max-height: 200px; padding: 0 1.25rem 1.1rem; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--dark-choco);
+    color: rgba(255, 244, 230, 0.8);
+    padding: 4rem 0 2rem;
+  }
+
+  [data-theme="dark"] footer { background: #0A0500; }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .footer-brand .logo-name { color: var(--cream); }
+  .footer-brand .logo-tagline { color: rgba(255,244,230,0.5); }
+
+  .footer-tagline {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.1rem;
+    color: rgba(255,244,230,0.6);
+    margin-top: 1rem;
+    line-height: 1.6;
+  }
+
+  .footer-col h4 {
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--light-caramel);
+    margin-bottom: 1rem;
+  }
+
+  .footer-col ul { list-style: none; }
+
+  .footer-col ul li { margin-bottom: 0.6rem; }
+
+  .footer-col ul li a {
+    color: rgba(255,244,230,0.6);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: var(--transition);
+  }
+
+  .footer-col ul li a:hover { color: var(--cream); padding-left: 4px; }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,244,230,0.1);
+    padding-top: 2rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+
+  .footer-bottom p { font-size: 0.82rem; color: rgba(255,244,230,0.4); }
+
+  /* ── FLOATING WA BUTTON ── */
+  #wa-float {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    width: 56px; height: 56px;
+    background: #25D366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.5);
+    z-index: 900;
+    text-decoration: none;
+    transition: var(--transition);
+    animation: waPulse 3s ease-in-out infinite;
+  }
+
+  #wa-float:hover { transform: scale(1.15); box-shadow: 0 6px 28px rgba(37,211,102,0.7); }
+
+  @keyframes waPulse {
+    0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.5); }
+    50% { box-shadow: 0 4px 20px rgba(37,211,102,0.5), 0 0 0 12px rgba(37,211,102,0.1); }
+  }
+
+  /* ── SCROLL ANIMATIONS ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1024px) {
+    .hero-content { gap: 2.5rem; }
+    .hero-cookie-scene { width: 340px; height: 340px; }
+    .cookie-main-circle { width: 300px; height: 300px; }
+    .about-grid { gap: 3rem; }
+    .nutrition-grid { grid-template-columns: 1fr; }
+    .packaging-inner { gap: 3rem; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 1.25rem; }
+    .container { padding: 0 1.25rem; }
+
+    .hero-content {
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 2rem;
+    }
+
+    .hero-text { order: 2; }
+    .hero-visual { order: 1; }
+
+    .hero-cta { justify-content: center; }
+    .hero-stats { justify-content: center; }
+
+    .hero-cookie-scene { width: 260px; height: 260px; }
+    .cookie-main-circle { width: 220px; height: 220px; font-size: 5rem; }
+
+    .about-grid { grid-template-columns: 1fr; }
+    .about-bear-wrapper { width: 220px; height: 220px; font-size: 6rem; }
+
+    .po-inner { grid-template-columns: 1fr; }
+
+    .nutrition-cards { grid-template-columns: 1fr 1fr; }
+
+    .packaging-inner { grid-template-columns: 1fr; }
+
+    .order-banner { padding: 3rem 1.5rem; }
+
+    .contact-grid { grid-template-columns: 1fr; }
+
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+
+    .footer-bottom { flex-direction: column; text-align: center; }
+
+    #side-menu { width: 280px; }
+
+    .countdown { gap: 0.5rem; }
+
+    .products-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .products-grid { grid-template-columns: 1fr; }
+    .nutrition-cards { grid-template-columns: 1fr; }
+    .hero-cookie-scene { width: 220px; height: 220px; }
+    .cookie-main-circle { width: 190px; height: 190px; font-size: 4rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Loading Screen -->
+<div id="loader">
+  <svg class="loader-cookie" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="40" cy="40" r="36" fill="#D4956A"/>
+    <circle cx="40" cy="40" r="36" fill="url(#cookieGrad)" opacity="0.8"/>
+    <circle cx="28" cy="30" r="5" fill="#5C3D2E" opacity="0.9"/>
+    <circle cx="52" cy="25" r="4" fill="#5C3D2E" opacity="0.9"/>
+    <circle cx="55" cy="50" r="6" fill="#3D2416" opacity="0.9"/>
+    <circle cx="30" cy="55" r="4" fill="#3D2416" opacity="0.8"/>
+    <circle cx="43" cy="45" r="3.5" fill="#5C3D2E" opacity="0.85"/>
+    <defs>
+      <radialGradient id="cookieGrad" cx="35%" cy="30%" r="60%">
+        <stop offset="0%" stop-color="#E8A97A"/>
+        <stop offset="100%" stop-color="#A0542A"/>
+      </radialGradient>
+    </defs>
+  </svg>
+  <div class="loader-text">KUMA 🐻</div>
+</div>
+
+<!-- Floating Particles -->
+<div id="particles"></div>
+
+<!-- Navbar -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <div class="logo-bear">🐻</div>
+    <div class="logo-text">
+      <span class="logo-name">KUMA</span>
+      <span class="logo-tagline">Kukis Manis</span>
+    </div>
+  </a>
+  <div class="nav-actions">
+    <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">☀️</button>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Side Menu Overlay -->
+<div id="side-menu-overlay"></div>
+
+<!-- Side Menu -->
+<div id="side-menu" role="dialog" aria-label="Navigation menu">
+  <div class="side-menu-header">
+    <span class="menu-brand">🐻 KUMA</span>
+    <button class="menu-close" id="menuClose" aria-label="Close menu">✕</button>
+  </div>
+  <ul class="side-nav-links">
+    <li><a href="#hero"><span class="nav-icon">🏠</span><span class="nav-label">Home</span></a></li>
+    <li><a href="#about"><span class="nav-icon">🐻</span><span class="nav-label">About Kuma</span></a></li>
+    <li><a href="#products"><span class="nav-icon">🍪</span><span class="nav-label">Produk</span></a></li>
+    <li><a href="#open-po"><span class="nav-icon">📦</span><span class="nav-label">Open PO</span></a></li>
+    <li><a href="#nutrition"><span class="nav-icon">📊</span><span class="nav-label">Nutrisi</span></a></li>
+    <li><a href="#sustainability"><span class="nav-icon">🌱</span><span class="nav-label">Sustainability</span></a></li>
+    <li><a href="#smart-packaging"><span class="nav-icon">📱</span><span class="nav-label">Smart Packaging</span></a></li>
+    <li><a href="#contact"><span class="nav-icon">📍</span><span class="nav-label">Contact</span></a></li>
+  </ul>
+  <a href="https://wa.me/6289515796458" target="_blank" rel="noopener" class="menu-order-btn">
+    🛒 Order Sekarang
+  </a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Homemade Premium Cookies
+        </div>
+        <h1 class="hero-title">
+          Freshly Baked<br>
+          <em>Happiness</em><br>
+          in Every Bite
+        </h1>
+        <p class="hero-subtitle">
+          Cookies hangat, manis, dan dibuat dengan cinta. Dibuat dari bahan lokal pilihan terbaik untuk setiap momen istimewa kamu.
+        </p>
+        <div class="hero-cta">
+          <a href="https://wa.me/6289515796458" target="_blank" rel="noopener" class="btn-primary">
+            🛒 Pesan Sekarang
+          </a>
+          <a href="#products" class="btn-secondary">
+            🍪 Lihat Produk
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Homemade</div>
+          </div>
+          <div class="hero-stat">
+            <div class="stat-num">4+</div>
+            <div class="stat-label">Varian Rasa</div>
+          </div>
+          <div class="hero-stat">
+            <div class="stat-num">50+</div>
+            <div class="stat-label">Happy Customers</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-cookie-scene">
+          <div class="cookie-main-circle">
+            <!-- Replace with actual cookie product photo -->
+            🍪
+          </div>
+          <div class="hero-chip chip-1"></div>
+          <div class="hero-chip chip-2"></div>
+          <div class="hero-chip chip-3"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-bear-wrapper" aria-label="KUMA bear mascot">🐻</div>
+        <div class="about-card-float card-top">
+          <span>🍪</span> Dibuat dengan cinta
+        </div>
+        <div class="about-card-float card-bottom">
+          <span>🌿</span> Bahan lokal pilihan
+        </div>
+      </div>
+      <div class="about-text">
+        <div class="reveal">
+          <span class="section-label">Tentang Kami</span>
+          <h2 class="section-title">Berawal dari Hobi,<br>Tumbuh dengan Semangat</h2>
+        </div>
+        <p class="section-desc reveal reveal-delay-1">
+          KUMA – KUkis MAnis lahir dari kecintaan terhadap dunia baking yang kemudian bertumbuh menjadi sebuah usaha yang menggabungkan kreativitas, pendidikan bisnis, serta semangat kewirausahaan muda yang penuh inovasi.
+        </p>
+        <div class="about-feature reveal reveal-delay-2">
+          <span class="feature-icon">🎓</span>
+          <div class="feature-content">
+            <h4>Inovasi Bisnis Muda</h4>
+            <p>Dikembangkan sebagai proyek bisnis yang memadukan ilmu manajemen dengan passion kuliner, KUMA menjadi bukti bahwa kreativitas dan pendidikan bisa berjalan beriringan.</p>
+          </div>
+        </div>
+        <div class="about-feature reveal reveal-delay-3">
+          <span class="feature-icon">🤎</span>
+          <div class="feature-content">
+            <h4>Filosofi Beruang Coklat</h4>
+            <p>Seperti beruang yang hangat dan menggemaskan, KUMA hadir membawa kehangatan, kenyamanan, dan kemanisan dalam setiap gigitan cookies buatan tangan kami.</p>
+          </div>
+        </div>
+        <div class="about-feature reveal reveal-delay-4">
+          <span class="feature-icon">🌾</span>
+          <div class="feature-content">
+            <h4>Kearifan Lokal</h4>
+            <p>Memanfaatkan kopi dan kakao premium dari petani lokal Jember, kami berkomitmen untuk mendukung ekosistem pertanian lokal sekaligus menghadirkan cita rasa terbaik.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products">
+  <div class="container">
+    <div class="products-header reveal">
+      <span class="section-label">Katalog Produk</span>
+      <h2 class="section-title">Koleksi Cookies KUMA</h2>
+      <p class="section-desc" style="margin: 0 auto;">Setiap cookies dibuat dengan bahan premium pilihan, dipanggang dengan penuh cinta untuk memberikan pengalaman rasa yang tak terlupakan.</p>
+    </div>
+    <div class="products-grid">
+
+      <!-- Choco Cookies -->
+      <div class="product-card reveal reveal-delay-1">
+        <div class="product-img-wrap">
+          <!--
+            Replace this emoji with:
+            <img src="images/products/choco-cookies.jpg" alt="Choco Cookies KUMA" loading="lazy">
+            Place image in: public/images/products/choco-cookies.jpg
+          -->
+          🍪
+          <span class="product-badge badge-available">✓ Available</span>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Choco Cookies</h3>
+          <p class="product-desc">Cookies coklat premium dengan paduan dark chocolate chip pilihan. Crispy di luar, lembut di dalam — definisi sempurna dari comfort food.</p>
+          <div class="product-meta">
+            <span class="product-price">Rp 35.000</span>
+            <span class="product-cal">🔥 180 kkal/buah</span>
+          </div>
+          <button class="product-btn active-btn" onclick="orderProduct('Choco Cookies')">
+            🛒 Pesan Sekarang
+          </button>
+        </div>
+      </div>
+
+      <!-- Red Velvet Cookies -->
+      <div class="product-card reveal reveal-delay-2">
+        <div class="product-img-wrap red-velvet">
+          <!--
+            Replace this emoji with:
+            <img src="images/products/red-velvet-cookies.jpg" alt="Red Velvet Cookies KUMA" loading="lazy">
+            Place image in: public/images/products/red-velvet-cookies.jpg
+          -->
+          🍪
+          <span class="product-badge badge-soon">⏳ Coming Soon</span>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Red Velvet Cookies</h3>
+          <p class="product-desc">Perpaduan warna merah elegan dengan rasa cream cheese yang lembut. Cookies eksklusif yang hadir untuk momen-momen spesial kamu.</p>
+          <div class="product-meta">
+            <span class="product-price">Rp 40.000</span>
+            <span class="product-cal">🔥 190 kkal/buah</span>
+          </div>
+          <button class="product-btn soon-btn" disabled>🔔 Segera Hadir</button>
+        </div>
+      </div>
+
+      <!-- Matcha Cookies -->
+      <div class="product-card reveal reveal-delay-3">
+        <div class="product-img-wrap matcha">
+          <!--
+            Replace this emoji with:
+            <img src="images/products/matcha-cookies.jpg" alt="Matcha Cookies KUMA" loading="lazy">
+            Place image in: public/images/products/matcha-cookies.jpg
+          -->
+          🍪
+          <span class="product-badge badge-soon">⏳ Coming Soon</span>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Matcha Cookies</h3>
+          <p class="product-desc">Kesegaran matcha premium dari Jepang bertemu dengan tekstur cookies renyah yang memanjakan. Sempurna untuk penikmat teh hijau.</p>
+          <div class="product-meta">
+            <span class="product-price">Rp 38.000</span>
+            <span class="product-cal">🔥 165 kkal/buah</span>
+          </div>
+          <button class="product-btn soon-btn" disabled>🔔 Segera Hadir</button>
+        </div>
+      </div>
+
+      <!-- Triple Choco Cookies -->
+      <div class="product-card reveal reveal-delay-4">
+        <div class="product-img-wrap triple">
+          <!--
+            Replace this emoji with:
+            <img src="images/products/triple-choco-cookies.jpg" alt="Triple Choco Cookies KUMA" loading="lazy">
+            Place image in: public/images/products/triple-choco-cookies.jpg
+          -->
+          🍪
+          <span class="product-badge badge-soon">⏳ Coming Soon</span>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Triple Choco Cookies</h3>
+          <p class="product-desc">Tiga lapis kenikmataan coklat: dark, milk, dan white chocolate dalam satu cookies. Untuk kamu yang tak pernah cukup dengan coklat biasa.</p>
+          <div class="product-meta">
+            <span class="product-price">Rp 45.000</span>
+            <span class="product-cal">🔥 220 kkal/buah</span>
+          </div>
+          <button class="product-btn soon-btn" disabled>🔔 Segera Hadir</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- OPEN PO -->
+<section id="open-po">
+  <div class="container">
+    <div class="po-inner">
+      <div class="reveal">
+        <span class="section-label">Pemesanan</span>
+        <h2 class="section-title">Status<br>Open PO</h2>
+        <p class="section-desc" style="margin-bottom: 2rem;">Kami membuka pemesanan secara berkala untuk memastikan setiap cookies yang kamu terima dalam kondisi segar dan sempurna.</p>
+        <div class="po-schedule">
+          <div class="schedule-item">
+            <span class="schedule-icon">📅</span>
+            <div class="schedule-content">
+              <h4>Jadwal Open PO</h4>
+              <p>Setiap Senin – Kamis, pukul 08.00 – 17.00 WIB</p>
+            </div>
+          </div>
+          <div class="schedule-item">
+            <span class="schedule-icon">🚚</span>
+            <div class="schedule-content">
+              <h4>Estimasi Pengiriman</h4>
+              <p>3–5 hari kerja setelah pembayaran dikonfirmasi</p>
+            </div>
+          </div>
+          <div class="schedule-item">
+            <span class="schedule-icon">📦</span>
+            <div class="schedule-content">
+              <h4>Minimum Order</h4>
+              <p>Minimal 1 toples (isi 12–15 pcs) per pesanan</p>
+            </div>
+          </div>
+          <div class="schedule-item">
+            <span class="schedule-icon">💳</span>
+            <div class="schedule-content">
+              <h4>Metode Pembayaran</h4>
+              <p>Transfer Bank, OVO, GoPay, Dana, QRIS</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <div class="po-status-card" id="poStatusCard">
+          <div class="po-badge" id="poBadge">
+            <span class="status-dot"></span>
+            <span id="poBadgeText">OPEN ORDER</span>
+          </div>
+          <h3 class="po-main-text" id="poMainText">Kami Sedang Buka!</h3>
+          <p class="po-sub-text" id="poSubText">Segera pesan sebelum stok habis ✨</p>
+          <div class="countdown" id="countdown">
+            <div class="countdown-unit">
+              <span class="countdown-num" id="cd-days">00</span>
+              <span class="countdown-label">Hari</span>
+            </div>
+            <div class="countdown-unit">
+              <span class="countdown-num" id="cd-hours">00</span>
+              <span class="countdown-label">Jam</span>
+            </div>
+            <div class="countdown-unit">
+              <span class="countdown-num" id="cd-mins">00</span>
+              <span class="countdown-label">Menit</span>
+            </div>
+            <div class="countdown-unit">
+              <span class="countdown-num" id="cd-secs">00</span>
+              <span class="countdown-label">Detik</span>
+            </div>
+          </div>
+          <a href="https://wa.me/6289515796458" target="_blank" rel="noopener" class="btn-primary" style="width: 100%; justify-content: center;">
+            💬 Hubungi via WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NUTRITION -->
+<section id="nutrition">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 3rem;" class="reveal">
+      <span class="section-label">Informasi Nutrisi</span>
+      <h2 class="section-title">Kandungan Gizi<br>Choco Cookies</h2>
+      <p class="section-desc" style="margin: 0 auto;">Per sajian 2 buah cookies (±30 gram). Informasi ini berdasarkan hasil analisis kandungan gizi bahan baku yang digunakan.</p>
+    </div>
+    <div class="nutrition-grid">
+      <div class="nutrition-info reveal">
+        <h3>🍪 Bahan Baku Utama</h3>
+        <p>Tepung terigu protein sedang, mentega tawar, gula pasir, telur ayam, coklat bubuk premium, dark chocolate chips, vanilla extract, baking soda, dan garam.</p>
+        <div class="serving-size">
+          <strong>📋 Ukuran Sajian:</strong> 2 keping (±30g)<br>
+          <strong>📦 Per Kemasan:</strong> 12–15 keping<br>
+          <strong>⚠️ Alergen:</strong> Mengandung gluten, produk susu, dan telur
+        </div>
+        <div style="margin-top: 1.5rem; padding: 1rem; background: var(--beige); border-radius: 12px; font-size: 0.82rem; color: var(--text-mid); line-height: 1.6;">
+          [data-theme="dark"] mengandung <strong style="color: var(--caramel);">0% pengawet buatan</strong> dan <strong style="color: var(--caramel);">0% pewarna sintetis</strong>. Dibuat fresh setiap batch.
+        </div>
+      </div>
+      <div class="nutrition-cards">
+        <div class="nutri-card cal reveal reveal-delay-1">
+          <div class="nutri-icon">🔥</div>
+          <div class="nutri-value">180<span class="nutri-unit"> kkal</span></div>
+          <div class="nutri-name">Kalori</div>
+          <div class="nutri-bar-wrap"><div class="nutri-bar" data-width="72"></div></div>
+        </div>
+        <div class="nutri-card protein reveal reveal-delay-2">
+          <div class="nutri-icon">💪</div>
+          <div class="nutri-value">3.5<span class="nutri-unit"> g</span></div>
+          <div class="nutri-name">Protein</div>
+          <div class="nutri-bar-wrap"><div class="nutri-bar" data-width="35"></div></div>
+        </div>
+        <div class="nutri-card carb reveal reveal-delay-3">
+          <div class="nutri-icon">⚡</div>
+          <div class="nutri-value">24<span class="nutri-unit"> g</span></div>
+          <div class="nutri-name">Karbohidrat</div>
+          <div class="nutri-bar-wrap"><div class="nutri-bar" data-width="60"></div></div>
+        </div>
+        <div class="nutri-card fat reveal reveal-delay-4">
+          <div class="nutri-icon">🧈</div>
+          <div class="nutri-value">8<span class="nutri-unit"> g</span></div>
+          <div class="nutri-name">Lemak</div>
+          <div class="nutri-bar-wrap"><div class="nutri-bar" data-width="40"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUSTAINABILITY -->
+<section id="sustainability">
+  <div class="container">
+    <div style="text-align: center;" class="reveal">
+      <span class="section-label">Inovasi & Keberlanjutan</span>
+      <h2 class="section-title">KUMA untuk<br>Masa Depan yang Lebih Baik</h2>
+      <p class="section-desc" style="margin: 0 auto 1rem;">Kami percaya bahwa bisnis yang baik tidak hanya menguntungkan, tetapi juga bertanggung jawab terhadap lingkungan dan masyarakat sekitar.</p>
+    </div>
+    <div class="sustain-grid">
+      <div class="sustain-card reveal reveal-delay-1">
+        <div class="sustain-num">01</div>
+        <div class="sustain-icon">☕</div>
+        <h3 class="sustain-title">Kopi & Kakao Lokal</h3>
+        <p class="sustain-desc">Memanfaatkan kopi dan kakao premium dari petani lokal Jember yang kaya akan cita rasa nusantara.</p>
+      </div>
+      <div class="sustain-card reveal reveal-delay-2">
+        <div class="sustain-num">02</div>
+        <div class="sustain-icon">🌾</div>
+        <h3 class="sustain-title">Dukung Petani Lokal</h3>
+        <p class="sustain-desc">Bermitra langsung dengan petani lokal untuk memastikan harga yang adil dan bahan berkualitas tinggi.</p>
+      </div>
+      <div class="sustain-card reveal reveal-delay-3">
+        <div class="sustain-num">03</div>
+        <div class="sustain-icon">♻️</div>
+        <h3 class="sustain-title">Zero Waste Production</h3>
+        <p class="sustain-desc">Sisa produksi dikelola secara bijak untuk meminimalkan limbah dan jejak karbon di setiap proses pembuatan.</p>
+      </div>
+      <div class="sustain-card reveal reveal-delay-4">
+        <div class="sustain-num">04</div>
+        <div class="sustain-icon">📱</div>
+        <h3 class="sustain-title">Smart QR Packaging</h3>
+        <p class="sustain-desc">Kemasan cerdas dengan QR Code terintegrasi yang memberikan informasi produk lengkap dan memudahkan pemesanan ulang.</p>
+      </div>
+      <div class="sustain-card reveal reveal-delay-5">
+        <div class="sustain-num">05</div>
+        <div class="sustain-icon">💻</div>
+        <h3 class="sustain-title">Digitalisasi Bisnis</h3>
+        <p class="sustain-desc">Transformasi digital melalui website dan media sosial untuk memperluas jangkauan pemasaran secara efisien dan modern.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SMART PACKAGING -->
+<section id="smart-packaging">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;">
+      <div class="reveal">
+        <span class="section-label">Teknologi Kemasan</span>
+        <h2 class="section-title">Smart Packaging<br>dengan QR Code</h2>
+        <p class="section-desc" style="margin-bottom: 2rem;">Setiap kemasan KUMA dilengkapi QR Code pintar yang membawa kamu ke dunia informasi produk secara lengkap dan interaktif.</p>
+        <div class="qr-features">
+          <div class="qr-feat">
+            <span class="qr-feat-icon">📋</span>
+            <div class="qr-feat-text">
+              <h5>Info Produk</h5>
+              <p>Detail lengkap setiap varian</p>
+            </div>
+          </div>
+          <div class="qr-feat">
+            <span class="qr-feat-icon">🧪</span>
+            <div class="qr-feat-text">
+              <h5>Komposisi</h5>
+              <p>Daftar bahan baku transparan</p>
+            </div>
+          </div>
+          <div class="qr-feat">
+            <span class="qr-feat-icon">❄️</span>
+            <div class="qr-feat-text">
+              <h5>Penyimpanan</h5>
+              <p>Panduan simpan yang tepat</p>
+            </div>
+          </div>
+          <div class="qr-feat">
+            <span class="qr-feat-icon">🛒</span>
+            <div class="qr-feat-text">
+              <h5>Pesan Ulang</h5>
+              <p>Langsung ke WhatsApp kami</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="qr-mockup reveal reveal-delay-2">
+        <div class="qr-package">
+          <div class="package-logo">🐻 KUMA</div>
+          <p style="font-size: 0.7rem; color: var(--text-light); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.1em;">Kukis Manis Premium</p>
+          <div class="qr-code-sim" id="qrCode" onclick="openQRModal()" title="Klik untuk simulasi scan QR Code">
+            <!-- QR Code Pattern Simulation -->
+          </div>
+          <p class="qr-scan-label" style="margin-top: 0.75rem;">👆 Tap untuk scan</p>
+          <p style="font-size: 0.75rem; color: var(--text-light); margin-top: 0.5rem;">Choco Cookies · 180 kkal</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QR Modal -->
+<div class="qr-modal-overlay" id="qrModal">
+  <div class="qr-modal">
+    <div class="qr-modal-header">
+      <h3 class="qr-modal-title">🐻 KUMA Product Info</h3>
+      <button class="modal-close" onclick="closeQRModal()">✕</button>
+    </div>
+    <div class="qr-info-section">
+      <h4>Informasi Produk</h4>
+      <p><strong>Nama:</strong> Choco Cookies KUMA<br>
+      <strong>Berat bersih:</strong> ±180 gram (12–15 pcs)<br>
+      <strong>Harga:</strong> Rp 35.000 per toples<br>
+      <strong>Diproduksi oleh:</strong> KUMA – Kukis Manis, Jember</p>
+    </div>
+    <div class="qr-info-section">
+      <h4>Komposisi Bahan</h4>
+      <ul>
+        <li>Tepung terigu protein sedang</li>
+        <li>Mentega tawar berkualitas</li>
+        <li>Gula pasir halus</li>
+        <li>Telur ayam kampung</li>
+        <li>Dark chocolate chips premium</li>
+        <li>Coklat bubuk tanpa gula</li>
+        <li>Vanilla extract, baking soda, garam</li>
+      </ul>
+    </div>
+    <div class="qr-info-section">
+      <h4>Cara Penyimpanan</h4>
+      <p>Simpan dalam wadah kedap udara di suhu ruang. Tahan hingga <strong>14 hari</strong> setelah tanggal produksi. Hindari paparan langsung sinar matahari dan kelembapan berlebih.</p>
+    </div>
+    <div class="qr-info-section">
+      <h4>Pesan Ulang</h4>
+      <p>Habis dan mau lagi? 🍪</p>
+    </div>
+    <a href="https://wa.me/6289515796458?text=Halo%20KUMA!%20Saya%20scan%20QR%20dari%20kemasan%20dan%20mau%20pesan%20ulang%20Choco%20Cookies%20🍪" target="_blank" rel="noopener" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 0.5rem;">
+      💬 Pesan Ulang via WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: 1rem;" class="reveal">
+      <span class="section-label">Testimoni Pelanggan</span>
+      <h2 class="section-title">Yang Mereka Katakan<br>Tentang KUMA</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal reveal-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Cookiesnya enak banget! Crispy di luar, chewy di dalam. Udah jadi cemilan wajib di rumah saya. Packaging-nya juga cantik dan informatif."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">😊</div>
+          <div>
+            <div class="testi-name">Sari Dewi</div>
+            <div class="testi-role">Pelanggan Setia · Jember</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Buat hampers ulang tahun teman, pilih KUMA! Responsif, pengiriman cepat, dan yang paling penting: cookiesnya LEZAT. Semua orang suka!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🌸</div>
+          <div>
+            <div class="testi-name">Rizky Pratama</div>
+            <div class="testi-role">Pembeli · Surabaya</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal reveal-delay-3">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"QR Code di kemasannya keren banget! Bisa langsung lihat komposisi dan pesan ulang. KUMA beneran inovatif. Rasa? Jangan ditanya, 10/10!"</p>
+        <div class="testi-author">
+          <div class="testi-avatar">🎯</div>
+          <div>
+            <div class="testi-name">Nanda Putri</div>
+            <div class="testi-role">Content Creator · Malang</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORDER SECTION -->
+<section id="order">
+  <div class="container">
+    <div class="order-banner reveal">
+      <h2>Siap Merasakan Kebahagiaan dalam Setiap Gigitan?</h2>
+      <p>Pesan sekarang dan dapatkan cookies homemade terbaik langsung ke pintumu 🚀</p>
+      <div class="order-btns">
+        <a href="https://wa.me/6289515796458?text=Halo%20KUMA!%20Saya%20mau%20pesan%20cookies%20🍪" target="_blank" rel="noopener" class="btn-wa">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.463 3.488"/>
+          </svg>
+          WhatsApp
+        </a>
+        <a href="https://www.instagram.com/albar_aaziz?igsh=MWwzc3JxMm9odGh0Zg==" target="_blank" rel="noopener" class="btn-ig">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+          </svg>
+          Instagram
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="reveal">
+        <span class="section-label">Hubungi Kami</span>
+        <h2 class="section-title" style="margin-bottom: 2rem;">Temukan<br>KUMA di Sini</h2>
+        <div class="contact-item">
+          <span class="contact-icon">💬</span>
+          <div>
+            <div class="contact-label">WhatsApp</div>
+            <div class="contact-value">
+              <a href="https://wa.me/6289515796458" target="_blank" rel="noopener">+62 895-1579-6458</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">📸</span>
+          <div>
+            <div class="contact-label">Instagram</div>
+            <div class="contact-value">
+              <a href="https://www.instagram.com/albar_aaziz?igsh=MWwzc3JxMm9odGh0Zg==" target="_blank" rel="noopener">@albar_aaziz</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">📍</span>
+          <div>
+            <div class="contact-label">Lokasi</div>
+            <div class="contact-value">Jl. Slamet Riyadi III, No. 2<br>Patrang, Jember, Jawa Timur</div>
+          </div>
+        </div>
+        <div class="contact-item">
+          <span class="contact-icon">🕐</span>
+          <div>
+            <div class="contact-label">Jam Operasional</div>
+            <div class="contact-value">Senin – Kamis, 08.00 – 17.00 WIB</div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <span class="section-label">FAQ</span>
+        <h3 class="section-title" style="font-size: 1.5rem; margin-bottom: 1.5rem;">Pertanyaan yang Sering Ditanyakan</h3>
+        <div class="faq-list" id="faqList">
+          <div class="faq-item">
+            <div class="faq-q">Berapa lama cookies bisa bertahan?</div>
+            <div class="faq-a">Cookies KUMA dapat bertahan hingga 14 hari jika disimpan dalam wadah kedap udara di suhu ruang. Hindari kelembapan dan paparan sinar matahari langsung.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Apakah bisa custom order?</div>
+            <div class="faq-a">Bisa! Kami menerima custom order untuk hampers, acara ulang tahun, pernikahan, dan momen spesial lainnya. Hubungi kami via WhatsApp untuk diskusi lebih lanjut.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Apakah ada pengiriman luar kota?</div>
+            <div class="faq-a">Ya, kami melayani pengiriman ke seluruh Indonesia menggunakan jasa ekspedisi terpercaya. Pastikan pemesanan minimal 5–7 hari sebelum tanggal dibutuhkan untuk luar kota.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Apa metode pembayaran yang tersedia?</div>
+            <div class="faq-a">Kami menerima Transfer Bank (BCA, Mandiri, BRI, BNI), OVO, GoPay, Dana, dan QRIS. Pembayaran dilakukan di muka (DP 50% atau full payment).</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q">Apakah cookies mengandung bahan pengawet?</div>
+            <div class="faq-a">Tidak! Semua cookies KUMA dibuat tanpa pengawet buatan, tanpa pewarna sintetis, dan fresh dipanggang setiap batch pesanan untuk memastikan kualitas terbaik.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom: 1rem; text-decoration: none;">
+          <div class="logo-bear">🐻</div>
+          <div class="logo-text">
+            <span class="logo-name">KUMA</span>
+            <span class="logo-tagline">Kukis Manis</span>
+          </div>
+        </div>
+        <p class="footer-tagline">"Kukis Manis,<br>Kehangatan dalam Setiap Gigitan"</p>
+        <div style="display: flex; gap: 0.75rem; margin-top: 1.5rem;">
+          <a href="https://wa.me/6289515796458" target="_blank" rel="noopener"
+            style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; font-size: 1rem; text-decoration: none;"
+            onmouseover="this.style.background='#25D366'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">💬</a>
+          <a href="https://www.instagram.com/albar_aaziz?igsh=MWwzc3JxMm9odGh0Zg==" target="_blank" rel="noopener"
+            style="width: 36px; height: 36px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; transition: all 0.3s; font-size: 1rem; text-decoration: none;"
+            onmouseover="this.style.background='#e4405f'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">📸</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Menu</h4>
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#about">About Kuma</a></li>
+          <li><a href="#products">Produk</a></li>
+          <li><a href="#open-po">Open PO</a></li>
+          <li><a href="#nutrition">Nutrisi</a></li>
+          <li><a href="#sustainability">Sustainability</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Produk</h4>
+        <ul>
+          <li><a href="#products">Choco Cookies</a></li>
+          <li><a href="#products">Red Velvet Cookies</a></li>
+          <li><a href="#products">Matcha Cookies</a></li>
+          <li><a href="#products">Triple Choco Cookies</a></li>
+        </ul>
+        <h4 style="margin-top: 1.5rem;">Kontak</h4>
+        <ul>
+          <li><a href="https://wa.me/6289515796458" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="https://www.instagram.com/albar_aaziz?igsh=MWwzc3JxMm9odGh0Zg==" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="#contact">Lokasi</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 KUMA – Kukis Manis. All rights reserved.</p>
+      <p>Made with 🤎 in Jember, Jawa Timur</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp Button -->
+<a href="https://wa.me/6289515796458?text=Halo%20KUMA!%20Saya%20mau%20pesan%20cookies%20🍪" target="_blank" rel="noopener" id="wa-float" aria-label="Chat via WhatsApp" title="Chat via WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.463 3.488"/>
+  </svg>
+</a>
+
+<script>
+// ── LOADING SCREEN ──
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 1800);
+});
+
+// ── DARK MODE ──
+const darkToggle = document.getElementById('darkToggle');
+const htmlEl = document.documentElement;
+
+function setTheme(theme) {
+  htmlEl.setAttribute('data-theme', theme);
+  darkToggle.textContent = theme === 'dark' ? '🌙' : '☀️';
+  try { localStorage.setItem('kuma-theme', theme); } catch(e) {}
+}
+
+try {
+  const saved = localStorage.getItem('kuma-theme');
+  if (saved) setTheme(saved);
+  else if (window.matchMedia('(prefers-color-scheme: dark)').matches) setTheme('dark');
+} catch(e) {}
+
+darkToggle.addEventListener('click', () => {
+  const current = htmlEl.getAttribute('data-theme');
+  setTheme(current === 'dark' ? 'light' : 'dark');
+});
+
+// ── HAMBURGER / SIDE MENU ──
+const hamburger = document.getElementById('hamburgerBtn');
+const sideMenu = document.getElementById('side-menu');
+const overlay = document.getElementById('side-menu-overlay');
+const menuClose = document.getElementById('menuClose');
+
+function openMenu() {
+  hamburger.classList.add('active');
+  sideMenu.classList.add('active');
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeMenu() {
+  hamburger.classList.remove('active');
+  sideMenu.classList.remove('active');
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+hamburger.addEventListener('click', () => {
+  sideMenu.classList.contains('active') ? closeMenu() : openMenu();
+});
+
+menuClose.addEventListener('click', closeMenu);
+overlay.addEventListener('click', closeMenu);
+
+// Close menu on nav link click
+document.querySelectorAll('#side-menu a').forEach(link => {
+  link.addEventListener('click', closeMenu);
+});
+
+// ── NAVBAR SCROLL ──
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+// ── FLOATING PARTICLES ──
+function createParticles() {
+  const container = document.getElementById('particles');
+  const count = 12;
+  const emojis = ['🍪', '✨', '🤎', '🍫'];
+
+  for (let i = 0; i < count; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const size = Math.random() * 20 + 14;
+    p.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      left: ${Math.random() * 100}%;
+      font-size: ${size * 0.9}px;
+      background: transparent;
+      animation-duration: ${Math.random() * 20 + 15}s;
+      animation-delay: ${Math.random() * 10}s;
+    `;
+    p.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    p.style.display = 'flex';
+    p.style.alignItems = 'center';
+    p.style.justifyContent = 'center';
+    container.appendChild(p);
+  }
+}
+createParticles();
+
+// ── QR CODE PATTERN ──
+function generateQRPattern() {
+  const qr = document.getElementById('qrCode');
+  if (!qr) return;
+  // Simple QR-like pattern
+  const pattern = [
+    1,1,1,0,1,1,1,
+    1,0,1,0,1,0,1,
+    1,1,1,1,0,1,1,
+    0,1,0,0,1,0,0,
+    1,1,1,0,1,1,1,
+    1,0,0,0,0,0,1,
+    1,1,0,1,1,1,1
+  ];
+  qr.innerHTML = '';
+  pattern.forEach(cell => {
+    const div = document.createElement('div');
+    div.className = 'qr-cell' + (cell === 0 ? ' white' : '');
+    qr.appendChild(div);
+  });
+}
+generateQRPattern();
+
+// ── QR MODAL ──
+function openQRModal() {
+  document.getElementById('qrModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeQRModal() {
+  document.getElementById('qrModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.getElementById('qrModal').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('qrModal')) closeQRModal();
+});
+
+// ── PO STATUS & COUNTDOWN ──
+function updatePOStatus() {
+  const now = new Date();
+  const day = now.getDay(); // 0=Sun, 1=Mon...4=Thu
+  const hour = now.getHours();
+  const isOpen = day >= 1 && day <= 4 && hour >= 8 && hour < 17;
+
+  const card = document.getElementById('poStatusCard');
+  const badge = document.getElementById('poBadge');
+  const badgeText = document.getElementById('poBadgeText');
+  const mainText = document.getElementById('poMainText');
+  const subText = document.getElementById('poSubText');
+
+  if (isOpen) {
+    card.className = 'po-status-card open';
+    badge.className = 'po-badge open';
+    badgeText.textContent = 'OPEN ORDER';
+    mainText.textContent = 'Kami Sedang Buka!';
+    subText.textContent = 'Segera pesan sebelum stok habis ✨';
+  } else {
+    card.className = 'po-status-card closed';
+    badge.className = 'po-badge closed';
+    badgeText.textContent = 'CLOSED';
+    mainText.textContent = 'Sedang Tutup';
+    subText.textContent = 'Buka kembali Senin–Kamis, 08.00–17.00 WIB';
+  }
+}
+
+function getNextOpenDate() {
+  const now = new Date();
+  const day = now.getDay();
+  const hour = now.getHours();
+  const nextOpen = new Date(now);
+
+  if (day === 0 || day === 5 || day === 6) {
+    // Weekend → next Monday
+    const daysToAdd = day === 0 ? 1 : (day === 5 ? 3 : 2);
+    nextOpen.setDate(nextOpen.getDate() + daysToAdd);
+    nextOpen.setHours(8, 0, 0, 0);
+  } else if (hour >= 17) {
+    // After hours on weekday
+    if (day === 4) {
+      // Thursday evening → next Monday
+      nextOpen.setDate(nextOpen.getDate() + 4);
+      nextOpen.setHours(8, 0, 0, 0);
+    } else {
+      nextOpen.setDate(nextOpen.getDate() + 1);
+      nextOpen.setHours(8, 0, 0, 0);
+    }
+  } else if (hour < 8) {
+    nextOpen.setHours(8, 0, 0, 0);
+  } else {
+    // Currently open — show close time
+    nextOpen.setHours(17, 0, 0, 0);
+  }
+
+  return nextOpen;
+}
+
+function updateCountdown() {
+  const target = getNextOpenDate();
+  const now = new Date();
+  const diff = target - now;
+
+  if (diff <= 0) {
+    updatePOStatus();
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+  document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+  document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+  document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+}
+
+updatePOStatus();
+updateCountdown();
+setInterval(() => { updatePOStatus(); updateCountdown(); }, 1000);
+
+// ── SCROLL ANIMATIONS ──
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ── NUTRITION BAR ANIMATION ──
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.nutri-bar').forEach(bar => {
+        const width = bar.getAttribute('data-width');
+        setTimeout(() => { bar.style.width = width + '%'; }, 300);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+const nutritionSection = document.getElementById('nutrition');
+if (nutritionSection) barObserver.observe(nutritionSection);
+
+// ── FAQ ACCORDION ──
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+
+// ── PRODUCT ORDER ──
+function orderProduct(name) {
+  const msg = encodeURIComponent(`Halo KUMA! Saya mau pesan ${name} 🍪. Apakah stok tersedia?`);
+  window.open(`https://wa.me/6289515796458?text=${msg}`, '_blank');
+}
+
+// ── SMOOTH ANCHOR SCROLL ──
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', (e) => {
+    const target = document.querySelector(anchor.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>
